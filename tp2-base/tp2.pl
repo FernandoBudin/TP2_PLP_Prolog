@@ -5,7 +5,8 @@
 % ----------------
 
 % esMatriz(+ListaDeListas)
-esMatriz(_) :- completar("Ejercicio 1").
+esMatriz([]).
+esMatriz([H | T]) :- not((member(Filas, T), length(H, Largo1), length(Filas, Largo2), Largo1 \= Largo2)).
 
 % ----------------
 % Ejercicio 2
