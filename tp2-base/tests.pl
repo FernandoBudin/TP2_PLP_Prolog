@@ -24,13 +24,13 @@ test(esMatriz, fail) :-
 
 % Ejercicio 2: tamaño
 
-test(tamaño, [nondet]) :-
-    tamaño([],Filas,Columnas),
+test(tamanio, [nondet]) :-
+    tamanio([],Filas,Columnas),
     Filas =@= 0,
     Columnas =@= 0.
 
-test(tamaño, [nondet]) :-
-    tamaño([[a,b,c],[d,e,f]],Filas,Columnas),
+test(tamanio, [nondet]) :-
+    tamanio([[a,b,c],[d,e,f]],Filas,Columnas),
     Filas =@= 2,
     Columnas =@= 3.
 
@@ -53,8 +53,8 @@ test(coordenadaEnRango, fail) :-
 
 % Ejercicio 4.a: tableroConPosiciónLiberada
 
-test(tableroConPosiciónLiberada, [nondet]) :-
-    tableroConPosiciónLiberada([[rojo,azul],[verde,rojo]], (2,1), T),
+test(tableroConPosicionLiberada, [nondet]) :-
+    tableroConPosicionLiberada([[rojo,azul],[verde,rojo]], (2,1), T),
     T =@= [[rojo,azul],[libre,rojo]].
 
 % Ejercicio 4.b: tableroConPosicionesLiberadas
