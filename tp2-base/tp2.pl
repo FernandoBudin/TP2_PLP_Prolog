@@ -14,7 +14,8 @@ esMatriz([H | T]) :- not((member(Filas, T), length(H, Largo1), length(Filas, Lar
 
 % tamaño(+Matriz, -Filas, -Columnas)
 % Precondición: esMatriz(Matriz)
-tamaño(_, _, _) :- completar("Ejercicio 2").
+tamanio([], 0, 0).
+tamanio([H | T], Filas, Columnas) :- length([H |T], Filas), length(H, Columnas).
 
 % ----------------
 % Ejercicio 3
@@ -22,7 +23,10 @@ tamaño(_, _, _) :- completar("Ejercicio 2").
 
 % coordenadaEnRango(+Matriz, +Coordenada)
 % Precondición: esMatriz(Matriz)
-coordenadaEnRango(_, _) :- completar("Ejercicio 3").
+
+% El predicado es reversible en Coordenada si Matriz está instanciada.
+% Si Matriz no se instancia, Coordenada debe estarlo.
+coordenadaEnRango(Matriz, (Fila, Columna)) :- tamanio(Matriz, F, C), between(1, F, Fila), between(1, C, Columna).
 
 % ----------------
 % Observadores de tablero.
@@ -63,7 +67,15 @@ color(T, Color, Coordenada) :-
 
 % tableroConPosiciónLiberada(+Tablero, +Coordenada, -TableroLiberado)
 % Precondición: esMatriz(Tablero), coordenadaEnRango(Tablero, Coordenada), not(libre(Tablero, Coordenada)).
-tableroConPosiciónLiberada(_, _, _) :- completar("Ejercicio 4.a").
+tableroConPosicionLiberada(Tablero, (Fila, Columna), TLiberado) :- 
+  F is Fila - 1,
+  C is Columna - 1,
+  length(FilaAntes, F),
+  append(FilaAntes, [FilaALiberar | FilaDespues], Tablero),
+  length(ColumnaAntes, C),
+  append(ColumnaAntes, [_ | ColumnaDespues], FilaALiberar),
+  append(ColumnaAntes, [libre | ColumnaDespues], FilaLiberada),
+  append(FilaAntes, [FilaLiberada | FilaDespues], TLiberado).
 
 % ----------------
 % Ejercicio 4.b)
@@ -72,7 +84,10 @@ tableroConPosiciónLiberada(_, _, _) :- completar("Ejercicio 4.a").
 % tableroConPosicionesLiberadas(+Tablero, +Posiciones, -TableroLiberado)
 % Precondición: esMatriz(Tablero).
 % Precondición: para cada Coordenada en Posiciones: coordenadaEnRango(Tablero, Coordenada), not(libre(Tablero, Coordenada)).
-tableroConPosicionesLiberadas(_, _, _) :- completar("Ejercicio 4.b").
+tableroConPosicionesLiberadas(Tablero, [], Tablero).
+tableroConPosicionesLiberadas(Tablero, [H | T], TLiberado) :- 
+  tableroConPosicionLiberada(Tablero, H, T1),
+  tableroConPosicionesLiberadas(T1, T, TLiberado).
 
 % ----------------
 % Operaciones sobre coordenadas.
