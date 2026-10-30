@@ -267,6 +267,7 @@ jugarNaive(T, TF) :-
 % Precondicion: esMatriz(Tablero).
 jugadasNaive(Tablero, []) :- not(jugadaPosible(Tablero, _)).
 jugadasNaive(Tablero, [H | T]) :- 
+  jugadaPosible(Tablero, H),
   jugarPosicion(Tablero, H, T1),
   jugadasNaive(T1, T).
 
@@ -277,7 +278,18 @@ jugadasNaive(Tablero, [H | T]) :-
 % victoriaConJugadas(+Tablero, +Jugadas).
 % Precondicion: esMatriz(Tablero).
 % Precondicion: para cada Coordenada en Jugadas: coordenadaEnRango(Tablero, Coordenada).
-victoriaConJugadas(_, _) :- completar("Ejercicio 7.a").
+
+% verificar que todas las posiciones de TRes sean libres. el problema es que cada vez que unifique con libre te va a dar true.
+% no existe una posicion en TRes que sea distinta a libre(ocupada).
+victoriaConJugadas(Tablero, Jugadas) :- 
+  jugarPosiciones(Tablero, Jugadas, TRes),
+  not(hayPosicionesOcupadas(TRes)).
+
+% Predicado Auxiliar: hayPosicionesOcupadas(+TRes)
+hayPosicionesOcupadas(Tablero) :- 
+  coordenadaEnRango(Tablero, Coordenada),
+  valorEnCoordenada(Tablero, Coordenada, Valor),
+  Valor \= libre.
 
 % ----------------
 % Ejercicio 7.b)
@@ -285,7 +297,9 @@ victoriaConJugadas(_, _) :- completar("Ejercicio 7.a").
 
 % juegoNaiveVictorioso(+Tablero, -Jugadas)
 % Precondicion: esMatriz(Tablero).
-juegoNaiveVictorioso(_, _) :- completar("Ejercicio 7.b").
+juegoNaiveVictorioso(Tablero, Jugadas) :- 
+  jugadasNaive(Tablero, Jugadas), 
+  victoriaConJugadas(Tablero, Jugadas).
 
 % ----------------
 % Ejercicio 7.c)
@@ -293,7 +307,16 @@ juegoNaiveVictorioso(_, _) :- completar("Ejercicio 7.b").
 
 % mejorJuegoNaive(+Tablero, -Jugadas)
 % Precondicion: esMatriz(Tablero).
-mejorJuegoNaive(_, _) :- completar("Ejercicio 7.c").
+mejorJuegoNaive(Tablero, Jugadas) :- 
+  juegoNaiveVictorioso(Tablero, Jugadas),
+  not(hayJugadaMasCorta(Tablero, Jugadas)).
+
+% Predicado Auxiliar: hayJuegoMejor(+Jugadas)
+hayJugadaMasCorta(Tablero, Jugada) :- 
+  juegoNaiveVictorioso(Tablero, J), 
+  length(J, LargoJ), 
+  length(Jugada, Largo), 
+  LargoJ < Largo.
 
 % ----------------
 % Ejercicio 8 - OPCIONAL
