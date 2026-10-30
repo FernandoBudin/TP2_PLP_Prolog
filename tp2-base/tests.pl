@@ -192,9 +192,9 @@ test(mejorJuegoNaive, [nondet]) :-
 
 % Ejercicio 8: tableroEnElQueNaiveGanaEmpezandoPor
 % Comentar para no incluir
-
-test(tableroEnElQueNaiveGanaEmpezandoPor, [nondet]) :-
-    with_output_to(string(_), once(tableroEnElQueNaiveGanaEmpezandoPor(T, (1,2)))),
-    juegoNaiveVictorioso(T, [(1,2)|_]).
+%
+%test(tableroEnElQueNaiveGanaEmpezandoPor, [nondet]) :-
+%    with_output_to(string(_), once(tableroEnElQueNaiveGanaEmpezandoPor(T, (1,2)))),
+%    juegoNaiveVictorioso(T, [(1,2)|_]).
 
 :- end_tests(tp2).
