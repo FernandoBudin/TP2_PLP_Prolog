@@ -51,7 +51,7 @@ test(coordenadaEnRango, fail) :-
 test(coordenadaEnRango, fail) :-
     coordenadaEnRango([[a,b,c],[d,e,f]], (1,4)).
 
-% Ejercicio 4.a: tableroConPosiciónLiberada
+% Ejercicio 4.a: tableroConPosicionLiberada
 
 test(tableroConPosicionLiberada, [nondet]) :-
     tableroConPosicionLiberada([[rojo,azul],[verde,rojo]], (2,1), T),
@@ -81,36 +81,36 @@ test(hayOcupadaAl, fail) :-
     tablero(2, T),
     hayOcupadaAl(T, (1,2), sur).
 
-% ocupadaEnLíneaRectaAl
+% ocupadaEnLineaRectaAl
 
-test(ocupadaEnLíneaRectaAl, [nondet]) :-
+test(ocupadaEnLineaRectaAl, [nondet]) :-
     tablero(1, T),
-    ocupadaEnLíneaRectaAl(T, (1,2), oeste, O),
+    ocupadaEnLineaRectaAl(T, (1,2), oeste, O),
     O =@= (1,1).
 
-test(ocupadaEnLíneaRectaAl, [nondet]) :-
+test(ocupadaEnLineaRectaAl, [nondet]) :-
     tablero(1, T),
-    ocupadaEnLíneaRectaAl(T, (1,2), sur, O),
+    ocupadaEnLineaRectaAl(T, (1,2), sur, O),
     O =@= (3,2).
 
-% ocupadasEnLíneaRecta
+% ocupadasEnLineaRecta
 
-test(ocupadasEnLíneaRecta, [nondet]) :-
+test(ocupadasEnLineaRecta, [nondet]) :-
     tablero(1, T),
-    ocupadasEnLíneaRecta(T, (1,2), Os),
+    ocupadasEnLineaRecta(T, (1,2), Os),
     msort(Os, OsOrdenadas),
     OsOrdenadas =@= [(1,1),(1,3),(3,2)].
 
-test(ocupadasEnLíneaRecta, [nondet]) :-
+test(ocupadasEnLineaRecta, [nondet]) :-
     tablero(3, T),
-    ocupadasEnLíneaRecta(T, (2,2), Os),
+    ocupadasEnLineaRecta(T, (2,2), Os),
     Os =@= [].
 
-% Ejercicio 5.a: jugarPosición
+% Ejercicio 5.a: jugarPosicion
 
-test(jugarPosición, [nondet]) :-
+test(jugarPosicion, [nondet]) :-
     tablero(1, T),
-    jugarPosición(T, (1,2), TR),
+    jugarPosicion(T, (1,2), TR),
     TR =@= [
       [libre, libre, azul,  rojo],
       [azul,  libre, azul,  rojo],
@@ -118,9 +118,9 @@ test(jugarPosición, [nondet]) :-
       [libre, libre, libre, rojo]
     ].
 
-test(jugarPosición, [nondet]) :-
+test(jugarPosicion, [nondet]) :-
     % empate: se liberan las vecinas de ambos colores
-    not(jugarPosición([[rojo,libre,azul]], (1,2), _)).
+    not(jugarPosicion([[rojo,libre,azul]], (1,2), _)).
 
 % Ejercicio 5.b: jugarPosiciones
 

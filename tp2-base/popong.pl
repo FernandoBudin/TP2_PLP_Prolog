@@ -67,21 +67,21 @@ bordeAlt(N, S) :-
 
 strMatriz([], '').
 strMatriz([Fila|Resto], S) :-
-  strLínea(Fila, S1),
+  strLinea(Fila, S1),
   strMatriz(Resto, S2),
   string_concat(S1, S2, S).
 
 strMatrizAlt([], '').
 strMatrizAlt([Fila|Resto], S) :-
-  strLíneaAlt(Fila, S1),
+  strLineaAlt(Fila, S1),
   strMatrizAlt(Resto, S2),
   string_concat(S1, S2, S).
 
-strLínea(Fila, S) :-
+strLinea(Fila, S) :-
   strFila(Fila, S1),
   string_concat('║', S1, S).
 
-strLíneaAlt(Fila, S) :-
+strLineaAlt(Fila, S) :-
   strFilaAlt(Fila, S1),
   string_concat('|', S1, S).
 
