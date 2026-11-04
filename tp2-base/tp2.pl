@@ -309,13 +309,13 @@ juegoNaiveVictorioso(Tablero, Jugadas) :-
 % Precondicion: esMatriz(Tablero).
 mejorJuegoNaive(Tablero, Jugadas) :- 
   juegoNaiveVictorioso(Tablero, Jugadas),
-  not(hayJugadaMasCorta(Tablero, Jugadas)).
+  length(Jugadas, Largo), 
+  not(hayJugadaMasCorta(Tablero, Jugadas, Largo)).
 
 % Predicado Auxiliar: hayJuegoMejor(+Jugadas)
-hayJugadaMasCorta(Tablero, Jugada) :- 
+hayJugadaMasCorta(Tablero, Jugadas, Largo) :- 
   juegoNaiveVictorioso(Tablero, J), 
   length(J, LargoJ), 
-  length(Jugada, Largo), 
   LargoJ < Largo.
 
 % ----------------
